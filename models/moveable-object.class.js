@@ -32,6 +32,7 @@ class MovableObject {
         ctx.stroke();
     }
 
+
     isAboveGround() {
         return this.y < 134;
     }
