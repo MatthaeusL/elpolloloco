@@ -20,7 +20,7 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        if (this instanceof ThrowableObject) {
+        if (this instanceof ThrowableObject) { // the bottle ThrowableObject should always fall
             return true;
 
         } else {
@@ -52,11 +52,7 @@ class MovableObject extends DrawableObject {
     }
     isDead() {
         return this.energy == 0;
-
-
     }
-
-
 
     moveRight() {
         this.x += this.speed

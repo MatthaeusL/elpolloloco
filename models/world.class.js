@@ -8,6 +8,8 @@ class World {
     StatusBar = new StatusBar();
     throwableObjects = [];
 
+
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -22,27 +24,49 @@ class World {
     run() {
         setInterval(() => {
 
-            this.checkSollisions();
+            this.checkCollisions();
             this.checkThrowObjects();
+            this.checkCollisionEnemyAndBottle()
 
         }, 200);
     }
-    d checkThrowObjects() {
+    checkThrowObjects() {
         if (this.keyboard.D) {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
         }
 
+
+
     }
 
-    checkSollisions() {
+    checkCollisions() {
         this.level.enemies.forEach((enemy) => {
-            if (this.character.isColliding(enemy)) {
+            if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
+                enemy.hitChicken();
+            }
+
+
+            if (this.character.isColliding(enemy) && enemy.chickenDead == false) {
                 this.character.hit();
                 this.StatusBar.setPercentage(this.character.energy);
             }
         });
     }
+
+    checkCollisionEnemyAndBottle() {
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                if (enemy.isColliding(bottle)) {
+                    console.log('chicken Dead');
+                    enemy.hitChicken();
+                }
+
+            })
+        })
+    }
+
+
 
 
     draw() {
@@ -84,8 +108,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
-
+        // mo.drawFrame(this.ctx);  --------- draw frame arround character and chicken
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

@@ -1,4 +1,6 @@
 class ThrowableObject extends MovableObject {
+    height = 60;
+    width = 60;
 
 
     constructor(x, y) {
@@ -14,11 +16,11 @@ class ThrowableObject extends MovableObject {
     }
 
     throw () {
+        this.speedY = 20;
 
-        this.speedY = 30;
         this.applyGravity();
         setInterval(() => {
-            this.x += 10;
+            this.x += 7;
         }, 25);
     }
 
