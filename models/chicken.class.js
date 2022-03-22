@@ -27,7 +27,7 @@ class Chicken extends MovableObject {
 
     animate() {
         setInterval(() => {
-            if (!this.chickenDead) {
+            if (!this.chickenDead) { //  check if chicken is dead else chicken move left
                 this.moveLeft();
             }
         }, 1000 / 60);
@@ -42,8 +42,7 @@ class Chicken extends MovableObject {
     }
 
     hitChicken() {
-        this.chickenDead = true;
-        clearInterval(this.moveLeft);
+        this.chickenDead = true; //set chicken is dead
 
     }
 

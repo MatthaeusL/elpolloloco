@@ -23,10 +23,10 @@ class World {
     }
     run() {
         setInterval(() => {
-
-            this.checkCollisions();
             this.checkThrowObjects();
-            this.checkCollisionEnemyAndBottle()
+            this.checkCollisions();
+            this.checkCollisionEnemyAndBottle();
+
 
         }, 200);
     }
@@ -35,9 +35,6 @@ class World {
             let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bottle);
         }
-
-
-
     }
 
     checkCollisions() {
@@ -45,8 +42,6 @@ class World {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
                 enemy.hitChicken();
             }
-
-
             if (this.character.isColliding(enemy) && enemy.chickenDead == false) {
                 this.character.hit();
                 this.StatusBar.setPercentage(this.character.energy);
@@ -58,17 +53,22 @@ class World {
         this.throwableObjects.forEach((bottle) => {
             this.level.enemies.forEach((enemy) => {
                 if (enemy.isColliding(bottle)) {
-                    console.log('chicken Dead');
+                    console.log('chicken dead');
                     enemy.hitChicken();
                 }
-
-            })
-        })
+            });
+        });
     }
-
-
-
-
+    checkCollisionEndbossAndBottle() {
+        this.throwableObjects.forEach((bottle) => {
+            this.level.enemies.forEach((enemy) => {
+                if (enemy.isColliding(bottle)) {
+                    console.log('chicken dead');
+                    enemy.hitChicken();
+                }
+            });
+        });
+    }
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -93,8 +93,6 @@ class World {
         requestAnimationFrame(function() {
             self.draw();
         });
-
-
     }
     addObjectsToMap(objects) {
         objects.forEach(o => {

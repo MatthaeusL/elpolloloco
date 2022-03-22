@@ -1,6 +1,9 @@
 class Endboss extends MovableObject {
     height = 300;
     width = 300;
+    endbossDead = false;
+    endbossEnergy = 100;
+
     IMAGES_WALKING = [
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G5.png',
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/2.Ateción-ataque/1.Alerta/G6.png',
@@ -31,6 +34,14 @@ class Endboss extends MovableObject {
 
         }, 170);
 
+    }
+    hitEndboss() {
+        this.endbossDead = true
+        this.energy -= 20;
+        if (energy < 0) {
+            this.endbossDead = true
+
+        }
     }
 
 }
