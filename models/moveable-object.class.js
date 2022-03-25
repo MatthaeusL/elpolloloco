@@ -1,5 +1,6 @@
 class MovableObject extends DrawableObject {
 
+    // endbossEnergy = 80;
 
     speed = 0.15;
     otherDirection = false;
@@ -45,6 +46,19 @@ class MovableObject extends DrawableObject {
         }
 
     }
+
+
+    // hitEndboss() {
+
+    //     this.endbossEnergy -= 10;
+    //     console.log('mov', this.endbossEnergy);
+    //     if (this.endbossEnergy < 0) {
+    //         this.endbossDead = true;
+    //         console.log('endboss dead');
+
+
+    //     }
+    // }
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // Diference in ms
         timepassed = timepassed / 1000; // ms in s 

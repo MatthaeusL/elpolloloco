@@ -1,25 +1,44 @@
+// these objects from this array were insert to level.class.js
+
 const level1 = new Level(
     [
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
-        new Chicken(),
         new Endboss(),
+    ], [
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+        new Chicken(),
+
+
     ], [
         new Cloud(),
         new Cloud(),
         new Cloud(),
         new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+        new Cloud(),
+
+
     ], [
         new BackgroundObject('img/5.Fondo/Capas/5.cielo_1920-1080px.png', -719),
         new BackgroundObject('img/5.Fondo/Capas/3.Fondo3/2.png', -719),
@@ -149,5 +168,5 @@ const level1 = new Level(
 
 
 
-    ]
+    ],
 );
