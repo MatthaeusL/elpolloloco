@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     lastHit = 0;
+    collectedItems = 0;
 
 
     applyGravity() {
@@ -33,6 +34,10 @@ class MovableObject extends DrawableObject {
             this.y + this.height > mo.y &&
             this.x < mo.x &&
             this.y < mo.y + mo.height;
+    }
+    isCollecting() {
+        this.collectedItems += 10;
+
     }
 
     hit() {

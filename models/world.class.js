@@ -6,10 +6,12 @@ class World {
     keyboard;
     camera_x = 0;
     StatusBar = new StatusBar(30, 0, 'life', 100);
-    StatusBarCoin = new StatusBar(20, 35, 'coins', 80);
-    StatusBarBottle = new StatusBar(10, 70, 'bottles', 40);
+    StatusBarCoin = new StatusBar(20, 35, 'coins', 1);
+    StatusBarBottle = new StatusBar(10, 70, 'bottles', 1);
     StatusBarEndboss = new StatusBar(500, 0, 'endboss', 100);
     throwableObjects = [];
+    collectedBottles = 0;
+    collectedCoins = 0;
 
 
 
@@ -31,6 +33,8 @@ class World {
             this.checkCollisions();
             this.checkCollisionEnemyAndBottle();
             this.checkCollisionEndbossAndBottle();
+            this.collectBottles();
+            this.collectCoins();
 
 
         }, 200);
@@ -82,15 +86,42 @@ class World {
 
     // Chicken
     checkCollisionEnemyAndBottle() {
-        this.throwableObjects.forEach((bottle) => {
-            this.level.enemies.forEach((enemy) => {
-                if (enemy.isColliding(bottle)) {
-                    console.log('chicken dead');
-                    enemy.hitChicken();
-                }
+            this.throwableObjects.forEach((bottle) => {
+                this.level.enemies.forEach((enemy) => {
+                    if (enemy.isColliding(bottle)) {
+                        console.log('chicken dead');
+                        enemy.hitChicken();
+                    }
+                });
             });
+        }
+        // Bottles
+    collectBottles() {
+            this.level.bottles.forEach((bottles) => {
+                if (this.character.isColliding(bottles)) {
+                    bottles.y -= 400;
+                    this.collectedBottles += 1;
+                    console.log(this.collectedBottles);
+                    this.StatusBarBottle.setPercentage(this.collectedBottles);
+                }
+
+            });
+
+        }
+        // Coins
+    collectCoins() {
+        this.level.coins.forEach((coins) => {
+            if (this.character.isColliding(coins)) {
+                coins.y -= 400;
+                this.collectedCoins += 1;
+                console.log('coins', this.collectedCoins);
+                this.StatusBarCoin.setPercentage(this.collectedCoins);
+            }
+
         });
+
     }
+
 
 
     draw() {
@@ -107,10 +138,14 @@ class World {
         // models/level.class.js
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.clouds);
+        this.addObjectsToMap(this.level.bottles);
+        this.addObjectsToMap(this.level.coins);
+
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
         this.addToMap(this.StatusBarEndboss);
+
         this.ctx.translate(-this.camera_x, 0);
         // ---------- space for fixed objects ------------
         this.addToMap(this.StatusBar);
