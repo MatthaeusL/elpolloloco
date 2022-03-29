@@ -1,6 +1,5 @@
 class World {
     character = new Character();
-    endboss = new Endboss();
     level = level1;
     ctx;
     canvas;
@@ -56,9 +55,9 @@ class World {
         });
         this.level.endboss.forEach((endboss) => {
             if (this.character.isColliding(endboss) && this.character.isAboveGround()) {
-                endboss.hitEndboss();
+                this.endboss.hit();
             }
-            if (this.character.isColliding(endboss) && endboss.endbossDead == false) {
+            if (this.character.isColliding(endboss) && this.level.endboss.energy > 0) {
                 this.character.hit();
                 this.StatusBar.setPercentage(this.character.energy);
                 console.log('world Leben', this.character.energy);
@@ -72,9 +71,9 @@ class World {
         this.throwableObjects.forEach((bottle) => {
             this.level.endboss.forEach((endboss) => {
                 if (endboss.isColliding(bottle)) {
-                    endboss.hitEndboss();
-                    this.StatusBarEndboss.setPercentage(this.endboss.endbossEnergy);
-                    console.log('world', this.endboss.endbossEnergy);
+                    endboss.hit();
+                    this.StatusBarEndboss.setPercentage(endboss.energy);
+                    console.log('world', endboss.energy);
                 }
             });
         });

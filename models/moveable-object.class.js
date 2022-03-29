@@ -43,34 +43,34 @@ class MovableObject extends DrawableObject {
             this.lastHit = new Date().getTime();
 
         }
-
-
-
-        isHurt() {
-            let timepassed = new Date().getTime() - this.lastHit; // Diference in ms
-            timepassed = timepassed / 1000; // ms in s 
-            return timepassed < 1;
-        }
-        isDead() {
-            return this.energy == 0;
-        }
-
-        moveRight() {
-            this.x += this.speed
-        }
-
-        moveLeft() {
-            this.x -= this.speed
-        }
-
-        playAnimation(images) {
-            let i = this.currentImage % images.length;
-            let path = images[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
-        }
-        jump() {
-            this.speedY = 30;
-        }
-
     }
+
+
+    isHurt() {
+        let timepassed = new Date().getTime() - this.lastHit; // Diference in ms
+        timepassed = timepassed / 1000; // ms in s 
+        return timepassed < 1;
+    }
+    isDead() {
+        return this.energy == 0;
+    }
+
+    moveRight() {
+        this.x += this.speed
+    }
+
+    moveLeft() {
+        this.x -= this.speed
+    }
+
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
+    }
+    jump() {
+        this.speedY = 30;
+    }
+
+}

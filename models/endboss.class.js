@@ -1,8 +1,6 @@
 class Endboss extends MovableObject {
     height = 300;
     width = 300;
-    endbossDead = false;
-    endbossEnergy = 100;
 
 
 
@@ -47,7 +45,7 @@ class Endboss extends MovableObject {
         'img/4.Secuencias_Enemy_gigantón-Doña_Gallinota-/3.Herida/G23.png',
     ]
 
-    constructor(x, y) {
+    constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ENDBOSS_DEAD);
@@ -55,19 +53,20 @@ class Endboss extends MovableObject {
 
         this.x = 500;
         this.y = 145;
-        // this.x = x;
-        // this.y = y;
+
         this.animate();
 
 
     }
 
+
     animate() {
 
         setInterval(() => {
-            if (this.endbossDead) {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
-            } else if (this.endbossEnergy < 99 && this.endbossEnergy >= 0) {
+            } else if (this.isHurt()) {
+                this.x -= (Math.random() < 0.5 ? -1 : 1) * 100;
                 this.playAnimation(this.IMAGES_ENDBOSS_HURT);
             } else {
                 this.moveLeft();
@@ -77,17 +76,7 @@ class Endboss extends MovableObject {
         }, 170);
     }
 
-    hitEndboss() {
 
-        this.endbossEnergy -= 10;
-        this.x -= 100;
-        // console.log('endbossEnergy', this.endbossEnergy);
-        if (this.endbossEnergy < 0) {
-            this.endbossEnergy == 0;
-            this.endbossDead = true;
-            console.log('endboss dead');
-        }
-    }
 
 
 
