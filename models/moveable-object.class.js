@@ -1,6 +1,5 @@
 class MovableObject extends DrawableObject {
 
-    // endbossEnergy = 80;
 
     speed = 0.15;
     otherDirection = false;
@@ -45,45 +44,33 @@ class MovableObject extends DrawableObject {
 
         }
 
+
+
+        isHurt() {
+            let timepassed = new Date().getTime() - this.lastHit; // Diference in ms
+            timepassed = timepassed / 1000; // ms in s 
+            return timepassed < 1;
+        }
+        isDead() {
+            return this.energy == 0;
+        }
+
+        moveRight() {
+            this.x += this.speed
+        }
+
+        moveLeft() {
+            this.x -= this.speed
+        }
+
+        playAnimation(images) {
+            let i = this.currentImage % images.length;
+            let path = images[i];
+            this.img = this.imageCache[path];
+            this.currentImage++;
+        }
+        jump() {
+            this.speedY = 30;
+        }
+
     }
-
-
-    // hitEndboss() {
-
-    //     this.endbossEnergy -= 10;
-    //     console.log('mov', this.endbossEnergy);
-    //     if (this.endbossEnergy < 0) {
-    //         this.endbossDead = true;
-    //         console.log('endboss dead');
-
-
-    //     }
-    // }
-    isHurt() {
-        let timepassed = new Date().getTime() - this.lastHit; // Diference in ms
-        timepassed = timepassed / 1000; // ms in s 
-        return timepassed < 1;
-    }
-    isDead() {
-        return this.energy == 0;
-    }
-
-    moveRight() {
-        this.x += this.speed
-    }
-
-    moveLeft() {
-        this.x -= this.speed
-    }
-
-    playAnimation(images) {
-        let i = this.currentImage % images.length;
-        let path = images[i];
-        this.img = this.imageCache[path];
-        this.currentImage++;
-    }
-    jump() {
-        this.speedY = 30;
-    }
-
-}
