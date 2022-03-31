@@ -2,6 +2,16 @@ let canvas;
 let world;
 let keyboard = new Keyboard;
 
+function startGame() {
+    document.getElementById('startScreen').classList.add('d-none');
+    document.getElementById('body').classList.add('bg-dark');
+
+    document.getElementById('canvas').classList.remove('d-none');
+
+
+    init();
+}
+
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
@@ -29,6 +39,13 @@ window.addEventListener("keydown", (event) => {
     }
     if (event.keyCode == 68) {
         keyboard.D = true;
+    }
+    if (event.keyCode == 77) {
+        if (keyboard.M == true) {
+            keyboard.M = false;
+        } else {
+            keyboard.M = true;
+        }
     }
 });
 

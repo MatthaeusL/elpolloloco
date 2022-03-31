@@ -4,6 +4,7 @@ class Character extends MovableObject {
     y = 34;
     speed = 10;
     walkingSound = new Audio('audio/walking.mp3');
+    hurtSound = new Audio('audio/hurt.mp3')
 
     IMAGES_WALKING = [
         'img/2.Secuencias_Personaje-Pepe-corrección/2.Secuencia_caminata/W-21.png',
@@ -56,8 +57,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_JUMPING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
-
-
         this.applyGravity();
         this.animate();
 
@@ -87,9 +86,10 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            if (this.energy == 0) {
+            if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
+                this.hurtSound.play();
                 this.playAnimation(this.IMAGES_HURT);
             }
             if (this.isAboveGround()) {

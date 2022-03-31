@@ -12,6 +12,12 @@ class DrawableObject {
         this.img.src = path;
     }
     draw(ctx) {
+        // try {
+        //     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        // } catch (e) {
+        //     console.log('could not load image', this.img);
+        //     console.warn('Error loading image', e);
+        // }
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
     loadImages(arr) {

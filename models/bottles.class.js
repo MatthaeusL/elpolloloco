@@ -1,5 +1,7 @@
 class Bottles extends MovableObject {
 
+    bottlesSound = new Audio('audio/bottle-lq.mp3')
+
     constructor() {
         super().loadImage('img/6.botella/2.Botella_enterrada2.png');
 

@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
     collectedItems = 0;
 
 
+
     applyGravity() {
         setInterval(() => {
             if (this.isAboveGround() || this.speedY > 0) {
@@ -50,13 +51,13 @@ class MovableObject extends DrawableObject {
         }
     }
 
-
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // Diference in ms
         timepassed = timepassed / 1000; // ms in s 
         return timepassed < 1;
     }
     isDead() {
+
         return this.energy == 0;
     }
 
@@ -74,6 +75,7 @@ class MovableObject extends DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     }
+
     jump() {
         this.speedY = 30;
     }

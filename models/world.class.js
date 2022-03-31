@@ -8,12 +8,12 @@ class World {
     StatusBar = new StatusBar(30, 0, 'life', 100);
     StatusBarCoin = new StatusBar(20, 35, 'coins', 1);
     StatusBarBottle = new StatusBar(10, 70, 'bottles', 1);
-    StatusBarEndboss = new StatusBar(500, 0, 'endboss', 100);
+    StatusBarEndboss = new StatusBar(this.level.endboss[0].x, 0, 'endboss', 100);
     throwableObjects = [];
     collectedBottles = 0;
     collectedCoins = 0;
-
-
+    playMusic = new Audio('audio/Lobo Loco - Old River Boat (ID 1368).mp3')
+        // quitGame = false;
 
 
     constructor(canvas, keyboard) {
@@ -23,6 +23,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+
     }
     setWorld() {
         this.character.world = this;
@@ -35,10 +36,26 @@ class World {
             this.checkCollisionEndbossAndBottle();
             this.collectBottles();
             this.collectCoins();
+            // this.quitInterval();
 
+            // this.Music();
 
         }, 200);
     }
+
+    // quitInterval() {
+    //     if (this.quitGame) {
+    //         this.level.enemies.forEach((enemy) => {
+    //             enemy.clearInterval(Chicken.chickenInterval);
+
+
+    //         });
+
+
+    //         console.log('quit intervall', this.quitGame);
+    //     }
+    // }
+
     checkThrowObjects() {
             if (this.keyboard.D) {
                 let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
@@ -46,6 +63,7 @@ class World {
             }
         }
         //  Character
+
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy) && this.character.isAboveGround()) {
@@ -59,9 +77,9 @@ class World {
         });
         this.level.endboss.forEach((endboss) => {
             if (this.character.isColliding(endboss) && this.character.isAboveGround()) {
-                this.endboss.hit();
+                endboss.hit();
             }
-            if (this.character.isColliding(endboss) && this.level.endboss.energy > 0) {
+            if (this.character.isColliding(endboss)) {
                 this.character.hit();
                 this.StatusBar.setPercentage(this.character.energy);
                 console.log('world Leben', this.character.energy);
@@ -77,7 +95,6 @@ class World {
                 if (endboss.isColliding(bottle)) {
                     endboss.hit();
                     this.StatusBarEndboss.setPercentage(endboss.energy);
-                    console.log('world', endboss.energy);
                 }
             });
         });
@@ -99,7 +116,8 @@ class World {
     collectBottles() {
             this.level.bottles.forEach((bottles) => {
                 if (this.character.isColliding(bottles)) {
-                    bottles.y -= 400;
+                    bottles.y -= 500;
+                    bottles.bottlesSound.play();
                     this.collectedBottles += 1;
                     console.log(this.collectedBottles);
                     this.StatusBarBottle.setPercentage(this.collectedBottles);
@@ -113,16 +131,21 @@ class World {
         this.level.coins.forEach((coins) => {
             if (this.character.isColliding(coins)) {
                 coins.y -= 400;
+                coins.coinSound.play();
                 this.collectedCoins += 1;
                 console.log('coins', this.collectedCoins);
                 this.StatusBarCoin.setPercentage(this.collectedCoins);
             }
-
         });
-
     }
-
-
+    Music() {
+        if (!this.keyboard.M) {
+            this.playMusic.play();
+        }
+        if (this.keyboard.M) {
+            this.playMusic.pause();
+        }
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -140,21 +163,17 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
-
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
         this.addToMap(this.StatusBarEndboss);
-
         this.ctx.translate(-this.camera_x, 0);
         // ---------- space for fixed objects ------------
         this.addToMap(this.StatusBar);
         this.addToMap(this.StatusBarCoin);
         this.addToMap(this.StatusBarBottle);
-
         this.ctx.translate(this.camera_x, 0);
         this.ctx.translate(-this.camera_x, 0);
-
         // draw wird immer wieder aufgerufen
         let self = this;
         requestAnimationFrame(function() {

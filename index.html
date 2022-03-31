@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image" href="img/sombrero.png">
     <link rel="stylesheet" href="style.css">
     <title>EL POLLO LOCO</title>
     <script src="models/drawable-object.class.js"></script>
@@ -24,27 +25,28 @@
     <script src="models/throwble-object.class.js"></script>
     <script src="models/level.class.js"></script>
     <script src="models/endboss.class.js"></script>
-
-
-
-
-
     <script src="levels/level1.js"></script>
-
-
-
-
     <script src="JS/game.js"></script>
 
 </head>
 
-<body onload="init()">
+<body id="body">
     <h1>El Pollo Loco</h1>
+    <div>
+        <img id="startScreen" class="startscreen" onclick="startGame()" src="img/9.Intro _ Outro Image/Start Screen/Opción2.png">
+    </div>
 
 
-    <canvas id="canvas" width="720" height="480">
+    <canvas class="d-none" id="canvas" width="720" height="480">
 
     </canvas>
+
+    <div>
+        <div class="test">
+            <h3><br><br><br><br><br><br> mal sehen wie das aussieht?</h3>
+        </div>
+    </div>
+
 </body>
 
 </html>
