@@ -36,6 +36,13 @@ class Character extends MovableObject {
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-54.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-55.png',
         'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
+        'img/2.Secuencias_Personaje-Pepe-corrección/5.Muerte/D-56.png',
 
     ]
 
@@ -63,31 +70,39 @@ class Character extends MovableObject {
     }
 
     animate() {
+        this.characterMove();
+        this.charakterAnimation();
 
-        setInterval(() => {
+    }
+
+    characterMove() {
+        this.characterMove = setInterval(() => {
             this.walkingSound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.levelEnd_x) {
                 this.moveRight();
                 this.walkingSound.play();
                 this.otherDirection = false;
-
             };
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.walkingSound.play();
                 this.otherDirection = true;
             };
-
             if (this.world.keyboard.SPACE && !this.isAboveGround()) {
                 this.jump();
             }
             this.world.camera_x = -this.x + 100;
-
         }, 1000 / 60);
+    }
 
-        setInterval(() => {
+    charakterAnimation() {
+        this.characterIntervalAnimation = setInterval(() => {
+            this.checkQuitGame();
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.setQuitGame();
+
+
             } else if (this.isHurt()) {
                 this.hurtSound.play();
                 this.playAnimation(this.IMAGES_HURT);
@@ -99,11 +114,22 @@ class Character extends MovableObject {
                     this.playAnimation(this.IMAGES_WALKING);
                 }
             }
+        }, 100);
+    }
+    setQuitGame() {
+        setTimeout(() => {
+            MovableObject.quitGame = true;
 
-        }, 50);
+        }, 200)
 
     }
 
+    checkQuitGame() {
+        if (MovableObject.quitGame == true) {
+            clearInterval(this.characterIntervalAnimation);
+            clearInterval(this.characterMove);
+        }
+    }
 
 
 }

@@ -9,6 +9,7 @@ class World {
     StatusBarCoin = new StatusBar(20, 35, 'coins', 1);
     StatusBarBottle = new StatusBar(10, 70, 'bottles', 1);
     StatusBarEndboss = new StatusBar(this.level.endboss[0].x, 0, 'endboss', 100);
+    endscreen = new Endscreen();
     throwableObjects = [];
     collectedBottles = 0;
     collectedCoins = 0;
@@ -36,30 +37,21 @@ class World {
             this.checkCollisionEndbossAndBottle();
             this.collectBottles();
             this.collectCoins();
-            // this.quitInterval();
-
-            // this.Music();
+            this.Music();
 
         }, 200);
     }
 
-    // quitInterval() {
-    //     if (this.quitGame) {
-    //         this.level.enemies.forEach((enemy) => {
-    //             enemy.clearInterval(Chicken.chickenInterval);
-
-
-    //         });
-
-
-    //         console.log('quit intervall', this.quitGame);
-    //     }
-    // }
 
     checkThrowObjects() {
             if (this.keyboard.D) {
-                let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-                this.throwableObjects.push(bottle);
+
+                if (this.collectedBottles > 0) {
+                    let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+                    this.throwableObjects.push(bottle);
+                    this.collectedBottles -= 1;
+                    console.log(this.collectedBottles);
+                }
             }
         }
         //  Character
@@ -119,7 +111,7 @@ class World {
                     bottles.y -= 500;
                     bottles.bottlesSound.play();
                     this.collectedBottles += 1;
-                    console.log(this.collectedBottles);
+                    // console.log(this.collectedBottles); /////////////////////////////////////////////////
                     this.StatusBarBottle.setPercentage(this.collectedBottles);
                 }
 
@@ -149,12 +141,26 @@ class World {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
-
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.movableObjects()
+        this.ctx.translate(-this.camera_x, 0);
+        this.fixedObjects();
+        this.ctx.translate(this.camera_x, 0);
+        this.ctx.translate(-this.camera_x, 0);
+        let self = this;
+        requestAnimationFrame(function() {
+            self.draw();
+        });
 
-
+    }
+    fixedObjects() {
+        this.addToMap(this.StatusBar);
+        this.addToMap(this.StatusBarCoin);
+        this.addToMap(this.StatusBarBottle);
+        this.drawEndscreen();
+    }
+    movableObjects() {
         // -------- these lines underneath are used to draw the gameobjects. 
         // these Object are level and level1 files written
         // levels/level1.js
@@ -167,19 +173,20 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
         this.addObjectsToMap(this.level.endboss);
         this.addToMap(this.StatusBarEndboss);
-        this.ctx.translate(-this.camera_x, 0);
-        // ---------- space for fixed objects ------------
-        this.addToMap(this.StatusBar);
-        this.addToMap(this.StatusBarCoin);
-        this.addToMap(this.StatusBarBottle);
-        this.ctx.translate(this.camera_x, 0);
-        this.ctx.translate(-this.camera_x, 0);
-        // draw wird immer wieder aufgerufen
-        let self = this;
-        requestAnimationFrame(function() {
-            self.draw();
-        });
     }
+    drawEndscreen() {
+        if (MovableObject.quitGame == true) {
+            this.addToMap(this.endscreen);
+            // this.playMusic.pause();
+            setTimeout(() => {
+
+                location.reload();
+            }, 1500)
+
+        }
+
+    }
+
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);

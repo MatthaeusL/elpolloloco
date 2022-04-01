@@ -42,7 +42,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_ENDBOSS_HURT);
         this.loadImages(this.IMAGES_ENDBOSS_DEAD);
-        this.x = 500;
+        this.x = 12000;
         this.y = 145;
         this.animate();
 
@@ -58,7 +58,7 @@ class Endboss extends MovableObject {
                 this.cnt++;
                 this.quitEndbossInterval();
             } else if (this.isHurt() && !this.isDead()) {
-                // this.x -= (Math.random() < 0.5 ? -1 : 1) * 100;
+                this.x -= (Math.random() < 0.5 ? -1 : 1) * 70;
                 console.log(this.energy, this.quitGame); ///////////////////////////////////////////////
                 this.playAnimation(this.IMAGES_ENDBOSS_HURT);
             } else {
