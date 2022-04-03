@@ -7,6 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image" href="img/sombrero.png">
     <link rel="stylesheet" href="style.css">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
     <title>EL POLLO LOCO</title>
     <script src="models/drawable-object.class.js"></script>
 
@@ -33,22 +40,49 @@
 </head>
 
 <body id="body">
-    <h1>El Pollo Loco</h1>
-    <div>
-        <img id="startScreen" class="startscreen" onclick="startGame()" src="img/9.Intro _ Outro Image/Start Screen/Opción2.png">
-    </div>
+    <div class="background">
+        <h1 class="text">EL POLLO LOCO</h1>
+        <div>
+
+            <img id="startScreen" class="startscreen" onclick="startGame()" src="img/9.Intro _ Outro Image/Start Screen/Opción2.png">
+        </div>
 
 
-    <canvas class="d-none" id="canvas" width="720" height="480">
+        <canvas class="d-none" id="canvas" width="720" height="480">
 
-    </canvas>
+        </canvas>
+        <div class="keys">
+            <div>
+                <img class="key desktop" onclick="keyM()" src="img/keyM.svg" alt="">
+            </div>
+            <div>
+                <img class="key mobile" onclick="keyM()" src="img/keyMusic.svg" alt="">
+            </div>
+            <div>
+                <img class="key desktop" onmousedown="mouseDownD()" ontouchstart="mouseDownD()" onmouseup="mouseUpD()" ontouchend="mouseUpD()" src="img/keyD.svg" alt="">
 
-    <div>
-        <div class="test">
-            <h3><br><br><br><br><br><br> mal sehen wie das aussieht?</h3>
+            </div>
+            <div>
+                <img class="key mobile" onmousedown="mouseDownD()" ontouchstart="mouseDownD()" onmouseup="mouseUpD()" ontouchend="mouseUpD()" src="img/keyDbottle.svg" alt="">
+
+            </div>
+            <div>
+                <img class="key" onmousedown="mouseDownSpace()" ontouchstart="mouseDownSpace()" onmouseup="mouseUpSpace()" ontouchend="mouseUpSpace()" src="img/keySpacet.svg" alt="">
+
+            </div>
+            <div>
+                <img class="key" onmousedown="mouseDownLeft()" ontouchstart="mouseDownLeft()" onmouseup="mouseUpLeft()" ontouchend="mouseUpLeft()" src="img/keyArrowLeft.svg" alt="">
+
+            </div>
+            <div>
+                <img class="key" onmousedown="mouseDownRight()" ontouchstart="mouseDownRight()" onmouseup="mouseUpRight()" ontouchend="mouseUpRight()" src="img/keyArrowRight.svg" alt="">
+
+            </div>
+            <div class="test">
+
+            </div>
         </div>
     </div>
-
 </body>
 
 </html>

@@ -9,13 +9,58 @@ function startGame() {
     document.getElementById('canvas').classList.remove('d-none');
 
 
+
     init();
 }
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+
 }
+
+function mouseDownLeft() {
+    keyboard.LEFT = true;
+}
+
+function mouseUpLeft() {
+    keyboard.LEFT = false;
+}
+
+function mouseDownRight() {
+    keyboard.RIGHT = true;
+}
+
+function mouseUpRight() {
+    keyboard.RIGHT = false;
+}
+
+function mouseDownD() {
+    keyboard.D = true;
+}
+
+function mouseUpD() {
+    keyboard.D = false;
+}
+
+function mouseDownSpace() {
+    keyboard.SPACE = true;
+}
+
+function mouseUpSpace() {
+    keyboard.SPACE = false;
+}
+
+function keyM() {
+    if (keyboard.M == true) {
+        keyboard.M = false;
+    } else {
+        keyboard.M = true;
+    }
+}
+
+
+
 
 window.addEventListener("keydown", (event) => {
 

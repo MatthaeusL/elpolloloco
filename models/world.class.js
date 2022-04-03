@@ -177,7 +177,7 @@ class World {
     drawEndscreen() {
         if (MovableObject.quitGame == true) {
             this.addToMap(this.endscreen);
-            // this.playMusic.pause();
+            this.playMusic.pause();
             setTimeout(() => {
 
                 location.reload();
