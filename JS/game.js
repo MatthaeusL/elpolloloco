@@ -5,6 +5,7 @@ let keyboard = new Keyboard;
 function startGame() {
     document.getElementById('startScreen').classList.add('d-none');
     document.getElementById('body').classList.add('bg-dark');
+    document.getElementById('startbutton').classList.add('d-none');
 
     document.getElementById('canvas').classList.remove('d-none');
 

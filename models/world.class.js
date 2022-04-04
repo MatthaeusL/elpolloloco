@@ -14,7 +14,7 @@ class World {
     collectedBottles = 0;
     collectedCoins = 0;
     playMusic = new Audio('audio/Lobo Loco - Old River Boat (ID 1368).mp3')
-        // quitGame = false;
+    quitGame = false;
 
 
     constructor(canvas, keyboard) {
@@ -177,7 +177,7 @@ class World {
     drawEndscreen() {
         if (MovableObject.quitGame == true) {
             this.addToMap(this.endscreen);
-            this.playMusic.pause();
+            // this.playMusic.pause();
             setTimeout(() => {
 
                 location.reload();

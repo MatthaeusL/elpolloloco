@@ -40,49 +40,64 @@
 </head>
 
 <body id="body">
-    <div class="background">
-        <h1 class="text">EL POLLO LOCO</h1>
+    <h1 class="text">EL POLLO LOCO</h1>
+    <div>
+
+        <img id="startScreen" class="startscreen" src="img/9.Intro _ Outro Image/Start Screen/Opción2.png">
+
+
+    </div>
+    </div>
+
+
+    <canvas class="d-none" id="canvas" width="720" height="480">
+
+    </canvas>
+    <div class="layer3">
         <div>
+            <div onclick="startGame()" class="startbutton" id="startbutton">START</div>
 
-            <img id="startScreen" class="startscreen" onclick="startGame()" src="img/9.Intro _ Outro Image/Start Screen/Opción2.png">
         </div>
-
-
-        <canvas class="d-none" id="canvas" width="720" height="480">
-
-        </canvas>
         <div class="keys">
-            <div>
+
+            <div class="keybox">
                 <img class="key desktop" onclick="keyM()" src="img/keyM.svg" alt="">
+                <div class="keyText">MUSIC <br> on/off</div>
             </div>
-            <div>
-                <img class="key mobile" onclick="keyM()" src="img/keyMusic.svg" alt="">
+            <div class="mobile">
+                <img class="key" onclick="keyM()" src="img/keyMusic.svg" alt="">
+
             </div>
-            <div>
+            <div class="keybox">
                 <img class="key desktop" onmousedown="mouseDownD()" ontouchstart="mouseDownD()" onmouseup="mouseUpD()" ontouchend="mouseUpD()" src="img/keyD.svg" alt="">
+                <div class="keyText">FIRE</div>
+            </div>
+            <div class="mobile">
+                <img class="key" onmousedown="mouseDownD()" ontouchstart="mouseDownD()" onmouseup="mouseUpD()" ontouchend="mouseUpD()" src="img/keyDbottle.svg" alt="">
 
             </div>
-            <div>
-                <img class="key mobile" onmousedown="mouseDownD()" ontouchstart="mouseDownD()" onmouseup="mouseUpD()" ontouchend="mouseUpD()" src="img/keyDbottle.svg" alt="">
-
-            </div>
-            <div>
+            <div class="keybox">
                 <img class="key" onmousedown="mouseDownSpace()" ontouchstart="mouseDownSpace()" onmouseup="mouseUpSpace()" ontouchend="mouseUpSpace()" src="img/keySpacet.svg" alt="">
+                <div class="keyText">jump</div>
 
             </div>
-            <div>
+            <div class="keybox">
                 <img class="key" onmousedown="mouseDownLeft()" ontouchstart="mouseDownLeft()" onmouseup="mouseUpLeft()" ontouchend="mouseUpLeft()" src="img/keyArrowLeft.svg" alt="">
-
+                <div class="keyText">run</div>
             </div>
-            <div>
+            <div class="keybox">
                 <img class="key" onmousedown="mouseDownRight()" ontouchstart="mouseDownRight()" onmouseup="mouseUpRight()" ontouchend="mouseUpRight()" src="img/keyArrowRight.svg" alt="">
-
+                <div class="keyText">run</div>
             </div>
-            <div class="test">
 
-            </div>
+
         </div>
     </div>
+
+
+
+
+
 </body>
 
 </html>

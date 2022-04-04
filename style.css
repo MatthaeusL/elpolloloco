@@ -7,7 +7,6 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0;
-    /* background-image: url('img/5.Fondo/1.png'); */
     background: rgba(0, 0, 0, 0.3) url('img/5.Fondo/1.png');
     background-size: cover;
     height: 100vh;
@@ -47,14 +46,67 @@ canvas {
 
 .key {
     height: 3.5rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.keybox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .keys {
-    /* width: 720px; */
+    width: 720px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     z-index: 5;
+    position: relative;
+    top: 120px;
+    color: #00021D;
+}
+
+.keyText {
+    font-size: 1.2rem;
+}
+
+.startbutton {
+    font-size: 2.5rem;
+    position: relative;
+    cursor: pointer;
+    top: 25px;
+    animation-name: startAnimation;
+    animation-duration: 4s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes startAnimation {
+    0% {
+        color: red;
+    }
+    25% {
+        color: yellow;
+    }
+    50% {
+        color: blue;
+    }
+    100% {
+        color: green;
+    }
+}
+
+.layer3 {
+    width: 720px;
+    height: 480px;
+    /* background-color: rgba(0, 0, 255, 0.354); */
+    z-index: 5;
+    position: absolute;
+    top: 124px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 
@@ -62,11 +114,11 @@ canvas {
 
 @media only screen and (max-width: 720px) {
     canvas {
-        width: 100%;
+        width: 100vw;
     }
     .startscreen {
         width: 100%;
-        height: 100%
+        height: calc(36.5vw * 1.7777);
     }
     body {
         background: none;
@@ -80,27 +132,41 @@ canvas {
     .text {
         display: none;
     }
-    .keys {
-        position: absolute;
-        top: 300px;
-    }
     .key {
-        width: 50%;
+        height: 36px;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+    .keys {
+        top: 0px;
+        width: unset;
+    }
+    .keyText {
+        display: none;
+    }
+    .layer3 {
+        top: unset;
+        width: 100%;
+        height: calc(36.5vw * 1.7777)
     }
 }
 
 @media only screen and (max-width: 480px) {
     canvas {
+        height: 100vh;
+    }
+    .key {
+        height: 30px;
+        margin-left: 12px;
+        margin-right: 12px;
+    }
+}
+
+@media only screen and (max-width: 350px) {
+    canvas {
         height: 100%;
     }
-    .startscreen {
-        height: 100%;
-        width: 100wh;
-    }
-    body {
-        background: none;
-    }
-    .text {
-        display: none;
+    .key {
+        height: 24px;
     }
 }
